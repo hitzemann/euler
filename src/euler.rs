@@ -19,7 +19,6 @@ pub fn problem0001(upto: u32) -> u32 {
 			multiples.insert(x*5,1);
 		}
 	}
-	println!("{:?}",multiples);
 	// Some funky syntax I remember from Haskell and Elixir
 	multiples.keys().fold(0, |x, acc| acc+x)
 }
