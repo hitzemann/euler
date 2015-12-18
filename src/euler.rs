@@ -11,14 +11,15 @@ pub fn problem0001(upto: u32) -> u32 {
 	// makes sure we don't count multiples of 3 AND 5
 	// twice e.g. 15
 	let mut multiples = HashMap::new();
-	for x in 1..upto/3 {
-		if x*3 <= upto {
+	for x in 1..upto/3+1 {
+		if upto > x*3 {
 			multiples.insert(x*3,1);
 		}
-		if x*5 <= upto {
+		if upto > x*5 {
 			multiples.insert(x*5,1);
 		}
 	}
+	println!("{:?}",multiples);
 	// Some funky syntax I remember from Haskell and Elixir
 	multiples.keys().fold(0, |x, acc| acc+x)
 }
