@@ -139,6 +139,9 @@ pub fn problem0005(range: u32) -> u32 {
 	// is the product of the maximal powers of primes in range.
 	//
 	// For 1..10 you take all primes from 1..10 and generate the powers so that x^y < 10
+	//
+	// I did this in Haskell as problem0005 = foldr1 lcm [1..20]
+	//
 	extern crate primal;
 	let mut _primes = Vec::new();
 	_primes = primal::Primes::all().take_while(|x| *x < range as usize).collect();
