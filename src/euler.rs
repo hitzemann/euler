@@ -167,10 +167,13 @@ fn problem0005_validation() {
 // Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 //
 pub fn problem0006(range: u64) -> u64 {
-	unimplemented!()
+	let sumsq = (1..range+1).map(|x| x*x).fold(0, |x, acc| acc + x);
+	let mut sqsum: u64 = (1..range+1).fold(0, |x, acc| acc + x);
+	sqsum = sqsum * sqsum;
+	sqsum-sumsq
 }
 
 #[test]
 fn problem0006_validation() {
-	assert_eq!(problem0006(100), 2640);
+	assert_eq!(problem0006(10), 2640);
 }
