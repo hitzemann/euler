@@ -148,7 +148,6 @@ pub fn problem0005(range: u32) -> u32 {
 		while x * prime <= range as usize {
 			x = x * prime;
 		}
-		println!("Prime {} contributes as {}", prime, x);
 		res = res * x;
 	}
 	res as u32
