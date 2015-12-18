@@ -71,3 +71,17 @@ pub fn problem0002(upto: u32) -> u32 {
 fn problem0002_validation() {
 	assert_eq!(problem0002(100), 44);
 }
+
+//
+// The prime factors of 13195 are 5, 7, 13 and 29.
+// What is the largest prime factor of the number 600851475143 ?
+//
+pub fn problem0003(number: u64) -> u64 {
+	extern crate primal;
+	unimplemented!();
+}
+
+#[test]
+fn problem0003_validation() {
+	assert_eq!(problem0003(13195), 29);
+}
