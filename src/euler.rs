@@ -170,6 +170,7 @@ pub fn problem0006(range: u64) -> u64 {
 	unimplemented!()
 }
 
+#[test]
 fn problem0006_validation() {
 	assert_eq!(problem0006(100), 2640);
 }
