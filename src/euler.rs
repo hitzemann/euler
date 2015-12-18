@@ -129,3 +129,22 @@ fn is_palindrome_0004_validation() {
 	assert!(is_palindrome_0004(12321_u64));
 	assert!(!is_palindrome_0004(1234_u64));
 }
+
+//
+// 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+// What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+//
+pub fn problem0005(range: u32) -> u32 {
+	// This can be quite easy using primal. The smallest positive number divisible by all natural numbers from 1 to x
+	// is the product of the maximal powers of primes in range.
+	//
+	// For 1..10 you take all primes from 1..10 and generate the powers so that x^y < 10
+	extern crate primal;
+	let sieve = primal::Sieve::new(range);
+	unimplemented!()
+}
+
+#[test]
+fn problem0005_validation() {
+	assert_eq!(problem0005(10), 2520);
+}
