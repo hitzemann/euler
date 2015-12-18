@@ -35,7 +35,36 @@ fn problem0001_validation() {
 //By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 //
 pub fn problem0002(upto: u32) -> u32 {
-	unimplemented!()
+	// I'll try to implement an interator for generating the Fibonacci sequence
+	// so we don't have to recurse
+	struct Fibonacci {
+		curr: u32,
+		next: u32,
+	}
+
+	impl Iterator for Fibonacci {
+		type Item = u32;
+		fn next(&mut self) -> Option<u32> {
+			let new_next = self.curr + self.next;
+			self.curr = self.next;
+			self.next = new_next;
+
+			// 'Some' will always be returned, this is strange, but I need to accept it as we need to return Option<T> ;)
+			Some(self.curr)
+		}
+	}
+
+	fn fibonacci() -> Fibonacci {
+		Fibonacci { curr: 1, next: 1 }
+	}
+
+	// Now we need to:
+	// 1. Take numbers while they are smaller than our limit
+	// 2. Only keep the even-valued ones
+	// 3. Add these up
+	fibonacci().take_while(|&x| x < upto)
+	           .filter(|&x| x%2==0)
+		   .fold(0, |x, acc| acc + x)
 }
 
 #[test]
