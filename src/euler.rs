@@ -79,7 +79,7 @@ pub fn problem0003(number: u64) -> u64 {
 	extern crate primal;
 	let limit: usize = number as usize;
 	// StreamingSieve would be more memory efficient, but does not have a factor() method
-	let sieve = primal::Sieve::new(limit);
+	let sieve = primal::Sieve::new(100000);
 	// We are only interested in the last prime factor as it will be the largest
 	// the second part of the vector does not interest in this problem
 	let (x, _) = sieve.factor(limit).unwrap().pop().unwrap();
@@ -97,7 +97,6 @@ fn problem0003_validation() {
 //
 pub fn problem0004(digits: u32) -> u64 {
 	let max: u64=10u64.pow(digits)-1;
-	let min: u64=10u64.pow(digits-1);
 	let mut res = 0;
 	let mut done = false;
 	let mut x = max;
@@ -105,10 +104,7 @@ pub fn problem0004(digits: u32) -> u64 {
 		res = x*max;
 		if is_palindrome_0004(res) {
 			done = true;
-		} else if x < min {
-			res = 0;
-			done = true;
-		}
+		} 
 		x -= 1;
 	}
 	res
