@@ -38,8 +38,8 @@ pub fn problem0002(upto: u32) -> u32 {
 	// I'll try to implement an interator for generating the Fibonacci sequence
 	// so we don't have to recurse
 	struct Fibonacci {
-		curr: u32,
-		next: u32,
+	      curr: u32,
+	      next: u32,
 	}
 
 	impl Iterator for Fibonacci {
@@ -63,8 +63,8 @@ pub fn problem0002(upto: u32) -> u32 {
 	// 2. Only keep the even-valued ones
 	// 3. Add these up
 	fibonacci().take_while(|&x| x < upto)
-	           .filter(|&x| x%2==0)
-		   .fold(0, |x, acc| acc + x)
+		.filter(|&x| x%2==0)
+		.fold(0, |x, acc| acc + x)
 }
 
 #[test]
@@ -97,10 +97,40 @@ fn problem0003_validation() {
 // Find the largest palindrome made from the product of two 3-digit numbers.
 //
 pub fn problem0004(digits: u32) -> u64 {
-	unimplemented!();
+	let max: u64=10u64.pow(digits)-1;
+	let min: u64=10u64.pow(digits-1);
+	let mut res = 0;
+	let mut done = false;
+	let mut x = max;
+	while !done {
+		res = x*max;
+		if is_palindrome_0004(res) {
+			done = true;
+		} else if x < min {
+			res = 0;
+			done = true;
+		}
+		x -= 1;
+	}
+	res
 }
 
 #[test]
 fn problem0004_validation() {
 	assert_eq!(problem0004(2), 9009);
+}
+
+fn is_palindrome_0004(digits: u64) -> bool {
+	let string: String = digits.to_string();
+	let backwards: String = string.chars().rev().collect();
+	string == backwards
+}
+
+#[test]
+fn is_palindrome_0004_validation() {
+	let x: u64 = 91;
+	let y: u64 = 99;
+	assert!(is_palindrome_0004(x*y));
+	assert!(is_palindrome_0004(12321_u64));
+	assert!(!is_palindrome_0004(1234_u64));
 }
