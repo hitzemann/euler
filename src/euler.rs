@@ -91,3 +91,16 @@ pub fn problem0003(number: u64) -> u64 {
 fn problem0003_validation() {
 	assert_eq!(problem0003(13195), 29);
 }
+
+//
+// A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+// Find the largest palindrome made from the product of two 3-digit numbers.
+//
+pub fn problem0004(digits: u32) -> u64 {
+	unimplemented!();
+}
+
+#[test]
+fn problem0004_validation() {
+	assert_eq!(problem0004(2), 9009);
+}
