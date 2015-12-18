@@ -78,7 +78,13 @@ fn problem0002_validation() {
 //
 pub fn problem0003(number: u64) -> u64 {
 	extern crate primal;
-	unimplemented!();
+	let limit: usize = number as usize;
+	// StreamingSieve would be more memory efficient, but does not have a factor() method
+	let sieve = primal::Sieve::new(limit);
+	// We are only interested in the last prime factor as it will be the largest
+	// the second part of the vector does not interest in this problem
+	let (x, _) = sieve.factor(limit).unwrap().pop().unwrap();
+	x as u64
 }
 
 #[test]
