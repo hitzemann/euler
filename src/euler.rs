@@ -140,11 +140,22 @@ pub fn problem0005(range: u32) -> u32 {
 	//
 	// For 1..10 you take all primes from 1..10 and generate the powers so that x^y < 10
 	extern crate primal;
-	let sieve = primal::Sieve::new(range);
-	unimplemented!()
+	let mut _primes = Vec::new();
+	_primes = primal::Primes::all().take_while(|x| *x < range as usize).collect();
+	let mut res = 1;
+	for prime in _primes {
+		let mut x = prime;
+		while x * prime <= range as usize {
+			x = x * prime;
+		}
+		println!("Prime {} contributes as {}", prime, x);
+		res = res * x;
+	}
+	res as u32
 }
 
 #[test]
 fn problem0005_validation() {
 	assert_eq!(problem0005(10), 2520);
 }
+
