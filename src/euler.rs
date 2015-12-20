@@ -297,7 +297,6 @@ fn problem0008_validation() {
 // Find the product abc.
 //
 pub fn problem0009(mysum: u64) -> u64 {
-	println!("Entered problem0009!");
 	let mut res=0;
 
 	'outer: for c in 3u64..mysum-3 {
