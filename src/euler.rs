@@ -317,3 +317,12 @@ pub fn problem0009(mysum: u64) -> u64 {
 fn problem0009_validation() {
 	assert_eq!(problem0009(3+4+5),3*4*5);
 }
+
+pub fn problem0010(limit: u64) -> u64 {
+	unimplemented!()
+}
+
+#[test]
+fn problem0010_validation() {
+	assert_eq!(problem0010(10), 17);
+}
