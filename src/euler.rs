@@ -320,7 +320,7 @@ fn problem0009_validation() {
 
 pub fn problem0010(limit: usize) -> usize {
 	extern crate primal;
-	primal::Primes::all().take_while(|x| *x < limit as usize).fold(0, |x, acc| x + acc)
+	primal::Primes::all().take_while(|x| *x < limit).fold(0, |x, acc| x + acc)
 }
 
 #[test]
