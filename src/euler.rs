@@ -287,3 +287,34 @@ pub fn problem0008(len: usize) -> u64 {
 fn problem0008_validation() {
 	assert_eq!(problem0008(4), 5832);
 }
+
+// A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+// a^2 + b^2 = c^2
+//
+// For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2.
+//
+// There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+// Find the product abc.
+//
+pub fn problem0009(mysum: u64) -> u64 {
+	println!("Entered problem0009!");
+	let mut res=0;
+
+	'outer: for c in 3u64..mysum-3 {
+		for b in 2u64..c {
+			if b<c && b+c<mysum {
+				let a: u64=mysum-(b+c);
+				if a>0 && a<b && a*a+b*b==c*c {
+					res=a*b*c;
+					break 'outer;
+				}
+			}	
+		}
+	}
+	res
+}
+
+#[test]
+fn problem0009_validation() {
+	assert_eq!(problem0009(3+4+5),3*4*5);
+}
