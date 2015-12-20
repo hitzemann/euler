@@ -181,6 +181,24 @@ fn problem0006_validation() {
 	assert_eq!(problem0006(10), 2640);
 }
 
+pub fn problem0006_alt(range: u64) -> u64 {
+	// The sum of 1..n is n(n+1)/2
+	fn sqsum(n: u64) -> u64 {
+		let sum = n*(n+1)/2;
+		sum * sum
+	}
+	// The sum of the squares from 1..n is n(n+1)(2n+1)/6
+	fn sumsq(n: u64) -> u64 {
+		n*(n+1)*(2*n+1)/6
+	}
+	sqsum(range)-sumsq(range)
+}
+
+#[test]
+fn problem0006_alt_validation() {
+	assert_eq!(problem0006_alt(10), 2640);
+}
+
 // 
 // By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.  
 // What is the 10 001st prime number?
