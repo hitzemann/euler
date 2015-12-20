@@ -8,4 +8,5 @@ fn main() {
 	println!("Problem    5: {}", euler::problem0005(20));
 	println!("Problem    6: {}", euler::problem0006(100));
 	println!("Problem    7: {}", euler::problem0007(10001));
+	println!("Problem    8: {}", euler::problem0008(13));
 }
