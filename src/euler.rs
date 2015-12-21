@@ -399,14 +399,23 @@ pub fn problem0011() -> u64 {
 	let mut vecs : Vec<Vec<_>> = vec![];
 	vecs.extend((0..rows).map(|col| (0..cols).map(|row| (row,col)).collect())); 	// rows
 	vecs.extend((0..cols).map(|row| (0..rows).map(|col| (row,col)).collect())); 	// cols
+	
 	vecs.extend((0..cols).map(|i| {
 		let (x0, y0) = (i, 0);
 		(0..cols - x0).map(|j| (x0 + j, y0 + j)).collect()
-		}));									// diag up right
-	vecs.extend((0..rows-1).map(|i| {
+    	}));
+	vecs.extend((0..rows - 1).map(|i| {
 		let (x0, y0) = (0, i + 1);
 		(0..rows - y0).map(|j| (x0 + j, y0 + j)).collect()
-		}));									// diag down left
+	}));
+	vecs.extend((0..cols).map(|i| {
+		let (x0, y0) = (i, 0);
+		(0..x0 + 1).map(|j| (x0 - j, y0 + j)).collect()
+	}));
+	vecs.extend((0..rows - 1).map(|i| {
+		let (x0, y0) = (cols - 1, i + 1);
+		(0..rows - y0).map(|j| (x0 - j, y0 + j)).collect()
+	}));
 	
 	vecs.iter()
 	    .map(|cells| {
