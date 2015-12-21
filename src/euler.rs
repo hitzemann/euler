@@ -381,6 +381,44 @@ pub fn problem0011() -> u64 {
 	20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
 	01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48
 	";
+	const FACTORS: usize = 4;
 
+	let grid: Vec<Vec<u64>> = INPUT.trim()
+	                               .lines()
+				       .map(|row| {
+				       		row.split_whitespace()
+						   .filter_map(|cell| cell.parse().ok())
+						   .collect()
+						  }
+					   )
+					.collect();
+	
+	let cols = grid[0].len();
+	let rows = grid.len();
+
+	let mut vecs : Vec<Vec<_>> = vec![];
+	vecs.extend((0..rows).map(|col| (0..cols).map(|row| (row,col)).collect())); 	// rows
+	vecs.extend((0..cols).map(|row| (0..rows).map(|col| (row,col)).collect())); 	// cols
+	vecs.extend((0..cols).map(|i| {
+		let (x0, y0) = (i, 0);
+		(0..cols - x0).map(|j| (x0 + j, y0 + j)).collect()
+		}));									// diag up right
+	vecs.extend((0..rows-1).map(|i| {
+		let (x0, y0) = (0, i + 1);
+		(0..rows - y0).map(|j| (x0 + j, y0 + j)).collect()
+		}));									// diag down left
+	
+	vecs.iter()
+	    .map(|cells| {
+	    	cells.windows(FACTORS)
+		     .map(|nums| nums.iter()
+		                     .map(|&(x, y)| grid[x][y])
+				     .fold(1, |x, y| x * y)
+			 )
+		     .max()
+		     .unwrap_or(0)
+		})
+	    .max()
+	    .unwrap()
 }
 
