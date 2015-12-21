@@ -451,34 +451,28 @@ fn problem0011_3factors_validation() {
 // What is the value of the first triangle number to have over five hundred divisors?
 // 
 pub fn problem0012(limit: u64) -> u64 {
+	extern crate primal;
 
 	fn nth_triangle(nth: u64) -> u64 {
 		nth * (nth + 1) / 2	
 	}
 
 	fn num_divisors(number: u64) -> u64 {
-		let mut res = 0;
-		for n in 1..number {
-			if number % n == 0 {
-				res += 1;
-			}
+		let mut res: u64 = 1;
+		let sieve = primal::Sieve::new(100000);
+		let mut factors = sieve.factor(number as usize).unwrap();
+		for _n in 0..factors.len() {
+			let (_, y) = factors.pop().unwrap();
+			res = res * (y as u64 + 1);
 		}
-		// the number itself is a valid divisor itself, but it not tested in the loop above
-		res+1
+		res
 	}
-	
-	let mut x: u64 = 1;
-	let mut done: bool = false;
 
-	while !done {
-		let tri = nth_triangle(x);
-		let divisors = num_divisors(tri);
-		if divisors > limit {
-			done = true;
-		} else {
-			x = x + 1;
-		}
+	let mut x = 1;
+	while num_divisors(nth_triangle(x)) <= limit {
+		x = x +1
 	}
+
 	nth_triangle(x)
 }
 
