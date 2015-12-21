@@ -473,7 +473,6 @@ pub fn problem0012(limit: u64) -> u64 {
 	while !done {
 		let tri = nth_triangle(x);
 		let divisors = num_divisors(tri);
-		println!("Triangle {} is {} and has {} divisors.", x, tri, divisors);
 		if divisors > limit {
 			done = true;
 		} else {
