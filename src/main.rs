@@ -11,5 +11,5 @@ fn main() {
 	println!("Problem    8: {}", euler::problem0008(13));
 	println!("Problem    9: {}", euler::problem0009(1000));
 	println!("Problem   10: {}", euler::problem0010(2000000));
-	println!("Problem   11: {}", euler::problem0011());
+	println!("Problem   11: {}", euler::problem0011(4));
 }
