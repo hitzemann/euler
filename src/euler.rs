@@ -430,3 +430,12 @@ pub fn problem0011(factors: usize) -> u64 {
 	    .unwrap()
 }
 
+#[test]
+fn problem0011_2factors_validation() {
+	assert_eq!(problem0011(2), 99*97); // row 2, col 3, up+right
+}
+
+#[test]
+fn problem0011_3factors_validation() {
+	assert_eq!(problem0011(3), 97*94*89); // row 15, col 5, up+right
+}
