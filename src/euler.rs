@@ -2,6 +2,7 @@
 // If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
 // Find the sum of all the multiples of 3 or 5 below 1000.
 //
+#[cfg(not(alt))]
 pub fn problem0001(upto: u32) -> u32 {
 	use std::collections::HashMap;
 	// For larger problems I assume it is easier
@@ -23,19 +24,15 @@ pub fn problem0001(upto: u32) -> u32 {
 	multiples.keys().fold(0, |x, acc| acc+x)
 }
 
-#[test]
-fn problem0001_validation() {
-	assert_eq!(problem0001(10), 23);
-}
-
-pub fn problem0001_alt(upto: u32) -> u32 {
+#[cfg(alt)]
+pub fn problem0001(upto: u32) -> u32 {
 	let res = (1..upto).filter(|x| x % 3 == 0 || x % 5 == 0).fold(0, |x, acc| x + acc);
 	res
 }
 
 #[test]
-fn problem0001_alt_validation() {
-	assert_eq!(problem0001_alt(10), 23);
+fn problem0001_validation() {
+	assert_eq!(problem0001(10), 23);
 }
 
 // 
@@ -179,6 +176,7 @@ fn problem0005_validation() {
 // Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 − 385 = 2640.
 // Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 //
+#[cfg(not(alt))]
 pub fn problem0006(range: u64) -> u64 {
 	let sumsq = (1..range+1).map(|x| x*x).fold(0, |x, acc| acc + x);
 	let mut sqsum: u64 = (1..range+1).fold(0, |x, acc| acc + x);
@@ -186,12 +184,8 @@ pub fn problem0006(range: u64) -> u64 {
 	sqsum-sumsq
 }
 
-#[test]
-fn problem0006_validation() {
-	assert_eq!(problem0006(10), 2640);
-}
-
-pub fn problem0006_alt(range: u64) -> u64 {
+#[cfg(alt)]
+pub fn problem0006(range: u64) -> u64 {
 	// The sum of 1..n is n(n+1)/2
 	fn sqsum(n: u64) -> u64 {
 		let sum = n*(n+1)/2;
@@ -205,8 +199,8 @@ pub fn problem0006_alt(range: u64) -> u64 {
 }
 
 #[test]
-fn problem0006_alt_validation() {
-	assert_eq!(problem0006_alt(10), 2640);
+fn problem0006_validation() {
+	assert_eq!(problem0006(10), 2640);
 }
 
 // 
@@ -456,8 +450,37 @@ fn problem0011_3factors_validation() {
 // 
 // What is the value of the first triangle number to have over five hundred divisors?
 // 
-pub fn problem0012(limit: usize) -> u64 {
-	unimplemented!()
+pub fn problem0012(limit: u64) -> u64 {
+
+	fn nth_triangle(nth: u64) -> u64 {
+		nth * (nth + 1) / 2	
+	}
+
+	fn num_divisors(number: u64) -> u64 {
+		let mut res = 0;
+		for n in 1..number {
+			if number % n == 0 {
+				res += 1;
+			}
+		}
+		// the number itself is a valid divisor itself, but it not tested in the loop above
+		res+1
+	}
+	
+	let mut x: u64 = 1;
+	let mut done: bool = false;
+
+	while !done {
+		let tri = nth_triangle(x);
+		let divisors = num_divisors(tri);
+		println!("Triangle {} is {} and has {} divisors.", x, tri, divisors);
+		if divisors > limit {
+			done = true;
+		} else {
+			x = x + 1;
+		}
+	}
+	nth_triangle(x)
 }
 
 #[test]
