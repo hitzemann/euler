@@ -452,14 +452,14 @@ fn problem0011_3factors_validation() {
 // 
 pub fn problem0012(limit: u64) -> u64 {
 	extern crate primal;
+	let sieve = primal::Sieve::new(100000);
 
 	fn nth_triangle(nth: u64) -> u64 {
 		nth * (nth + 1) / 2	
 	}
 
-	fn num_divisors(number: u64) -> u64 {
+	fn num_divisors(number: u64, sieve: &primal::Sieve) -> u64 {
 		let mut res: u64 = 1;
-		let sieve = primal::Sieve::new(100000);
 		let mut factors = sieve.factor(number as usize).unwrap();
 		for _n in 0..factors.len() {
 			let (_, y) = factors.pop().unwrap();
@@ -469,7 +469,7 @@ pub fn problem0012(limit: u64) -> u64 {
 	}
 
 	let mut x = 1;
-	while num_divisors(nth_triangle(x)) <= limit {
+	while num_divisors(nth_triangle(x), &sieve) <= limit {
 		x = x +1
 	}
 
