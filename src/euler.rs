@@ -480,3 +480,19 @@ pub fn problem0012(limit: u64) -> u64 {
 fn problem0012_validation() {
 	assert_eq!(problem0012(5),28);
 }
+
+pub fn problem0016(n: u32) -> u64 {
+    use std::ops::Deref;
+    extern crate num_bigint;
+    let bignum = num_bigint::BigUint::new([2 as u32].to_vec());
+    let mut res: u64 = 0;
+    for byte in bignum.pow(n).to_radix_le(10).iter() {
+        res += *byte.deref() as u64
+    }
+    res
+}
+
+#[test]
+fn problem0016_validation() {
+    assert_eq!(problem0016(15),26);
+}
