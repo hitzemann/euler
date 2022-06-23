@@ -272,7 +272,7 @@ pub fn problem0008(len: usize) -> u64 {
 	     .map(|n| n as u64)
 	     .collect::<Vec<_>>()
 	     .windows(len)
-	     .map(|window| window.iter().fold(1u64, |m, &n| m * n))
+	     .map(|window| window.iter().product())
 	     .max()
 	     .unwrap()
 }
@@ -314,7 +314,7 @@ fn problem0009_validation() {
 
 pub fn problem0010(limit: usize) -> usize {
 	extern crate primal;
-	primal::Primes::all().take_while(|x| *x < limit).fold(0, |x, acc| x + acc)
+	primal::Primes::all().take_while(|x| *x < limit).sum()
 }
 
 #[test]
@@ -415,7 +415,7 @@ pub fn problem0011(factors: usize) -> u64 {
 	    	cells.windows(factors)
 		     .map(|nums| nums.iter()
 		                     .map(|&(x, y)| grid[x][y])
-				     .fold(1, |x, y| x * y)
+                       .product()
 			 )
 		     .max()
 		     .unwrap_or(0)
