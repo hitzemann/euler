@@ -156,9 +156,9 @@ pub fn problem0005(range: u32) -> u32 {
 	for prime in _primes {
 		let mut x = prime;
 		while x * prime <= range as usize {
-			x = x * prime;
+			x *= prime;
 		}
-		res = res * x;
+		res *= x;
 	}
 	res as u32
 }
@@ -243,7 +243,7 @@ fn problem0007_validation() {
 //
 
 pub fn problem0008(len: usize) -> u64 {
-	const INPUT: &'static str = r"
+	const INPUT: &str = r"
 	73167176531330624919225119674426574742355349194934
 	96983520312774506326239578318016984801869478851843
 	85861560789112949495459501737958331952853208805511
@@ -353,7 +353,7 @@ fn problem0010_validation() {
 // Main issue: There is no smaller sized problem which we can use to verify and for a #[test] :(
 pub fn problem0011(factors: usize) -> u64 {
 	// I will use the input method I also used for problem 8
-	const INPUT: &'static str = r"
+	const INPUT: &str = r"
 	08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 	49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 	81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
@@ -463,14 +463,14 @@ pub fn problem0012(limit: u64) -> u64 {
 		let mut factors = sieve.factor(number as usize).unwrap();
 		for _n in 0..factors.len() {
 			let (_, y) = factors.pop().unwrap();
-			res = res * (y as u64 + 1);
+			res *= y as u64 + 1;
 		}
 		res
 	}
 
 	let mut x = 1;
 	while num_divisors(nth_triangle(x), &sieve) <= limit {
-		x = x +1
+		x += 1
 	}
 
 	nth_triangle(x)
