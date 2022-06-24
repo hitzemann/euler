@@ -83,7 +83,6 @@ fn problem0002_validation() {
 // What is the largest prime factor of the number 600851475143 ?
 //
 pub fn problem0003(number: u64) -> u64 {
-	extern crate primal;
 	let limit: usize = number as usize;
 	// StreamingSieve would be more memory efficient, but does not have a factor() method
 	let sieve = primal::Sieve::new(100000);
@@ -208,7 +207,6 @@ fn problem0006_validation() {
 // What is the 10 001st prime number?
 //
 pub fn problem0007(nth: usize) -> usize {
-	extern crate primal;
 	primal::StreamingSieve::nth_prime(nth)
 }
 
@@ -451,7 +449,6 @@ fn problem0011_3factors_validation() {
 // What is the value of the first triangle number to have over five hundred divisors?
 // 
 pub fn problem0012(limit: u64) -> u64 {
-	extern crate primal;
 	let sieve = primal::Sieve::new(100000);
 
 	fn nth_triangle(nth: u64) -> u64 {
@@ -483,7 +480,6 @@ fn problem0012_validation() {
 
 pub fn problem0016(n: u32) -> u64 {
     use std::ops::Deref;
-    extern crate num_bigint;
     let bignum = num_bigint::BigUint::new([2 as u32].to_vec());
     let mut res: u64 = 0;
     for byte in bignum.pow(n).to_radix_le(10).iter() {
@@ -495,4 +491,52 @@ pub fn problem0016(n: u32) -> u64 {
 #[test]
 fn problem0016_validation() {
     assert_eq!(problem0016(15),26);
+}
+
+pub fn problem0357(limit: u64) -> u64 {
+
+    use primal::is_prime;
+    use rayon::prelude::*;
+
+    fn is_in(num: u64) -> bool {
+        if !(is_prime(num+1)) {
+            return false;
+        }
+        let max = ((num as f64).sqrt() + 0.5).floor() as u64;
+        if max*max == num {
+            return false;
+        }
+        let mut factors = Vec::new();
+        for factor in 1..max {
+            if num % factor == 0 {
+                factors.push(factor);
+            }
+        }
+        for factor in factors {
+            if !(is_prime(num/factor+factor)) {
+                return false;
+            }
+        }
+        return true; 
+    }
+
+    let mut vec = Vec::new();
+    for n in 2..limit+1 {
+        vec.push(n as u64);
+    }
+    let res: u64 = vec.par_iter()
+              .filter(|&x| x%2==0)
+              .filter(|&x| is_in(*x))
+              .sum::<u64>();
+    res+1 as u64
+}
+
+#[test]
+fn problem0357_validation() {
+    assert_eq!(problem0357(30),71);
+    //assert_eq!(problem0357(1000),8427);
+    //assert_eq!(problem0357(10000),262615);
+    //assert_eq!(problem0357(100000),9157937);
+    //assert_eq!(problem0357(1000000),524402305);
+    //assert_eq!(problem0357(10000000),27814470277);
 }

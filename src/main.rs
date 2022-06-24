@@ -1,5 +1,9 @@
 mod euler;
 
+extern crate primal;
+extern crate num_bigint;
+extern crate rayon;
+
 fn main() {
 	println!("Problem    1: {}", euler::problem0001(1000));
 	println!("Problem    2: {}", euler::problem0002(4000000));
@@ -14,4 +18,5 @@ fn main() {
 	println!("Problem   11: {}", euler::problem0011(4));
 	println!("Problem   12: {}", euler::problem0012(500));
 	println!("Problem   16: {}", euler::problem0016(1000));
+	println!("Problem  357: {}", euler::problem0357(100000000));
 }
