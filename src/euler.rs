@@ -702,7 +702,7 @@ pub fn problem0013() -> String {
 
 pub fn problem0016(n: u32) -> u64 {
 	use std::ops::Deref;
-	let bignum = num_bigint::BigUint::new([2 as u32].to_vec());
+	let bignum = num_bigint::BigUint::new([2_u32].to_vec());
 	let mut res: u64 = 0;
 	for byte in bignum.pow(n).to_radix_le(10).iter() {
 		res += *byte.deref() as u64
@@ -738,7 +738,7 @@ pub fn problem0357(limit: u64) -> u64 {
 				return false;
 			}
 		}
-		return true;
+		true
 	}
 
 	let mut vec = Vec::new();
@@ -750,7 +750,7 @@ pub fn problem0357(limit: u64) -> u64 {
 		.filter(|&x| x % 2 == 0)
 		.filter(|&x| is_in(*x))
 		.sum::<u64>();
-	res + 1 as u64
+	res + 1
 }
 
 #[test]
