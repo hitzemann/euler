@@ -8,4 +8,5 @@ My attempts to solve projecteuler.net problems using rust-lang
 [![rust-clippy analyze](https://github.com/hitzemann/euler/actions/workflows/rust-clippy.yml/badge.svg)](https://github.com/hitzemann/euler/actions/workflows/rust-clippy.yml)
 
 # LICENSE
-Public domain, enough said...
+
+Please check the file LICENSE, tl;dr I'm using unilicense for this repo
