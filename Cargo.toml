@@ -4,6 +4,6 @@ version = "0.1.1"
 authors = ["Simon Hitzemann <simon@hitzemann.org>"]
 
 [dependencies]
-primal = "0.3.2"
+primal = "0.3.3"
 num-bigint = "0.4.5"
 rayon = "*"
